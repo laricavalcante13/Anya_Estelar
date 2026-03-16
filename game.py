@@ -16,6 +16,8 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Anya Estelar: Missão Paz Mundial")
+    background = pygame.image.load("assets/background.jpg").convert()
+    background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
 
     # Grupos de Sprites
@@ -43,12 +45,12 @@ def main():
 
         # 3. Spawning e Updates
         if random.random() < 0.02: 
-            s = Item(GOLD, True)
+            s = Item(is_star=True)
             stars.add(s)
             all_sprites.add(s)
         
         if random.random() < 0.03:
-            b = Item(RED, False)
+            b = Item(is_star=False)
             bolts.add(b)
             all_sprites.add(b)
 
@@ -69,7 +71,7 @@ def main():
                 running = False
 
         # 5. Desenho
-        screen.fill()
+        screen.blit(background, (0, 0))
         all_sprites.draw(screen)
         
         pygame.display.flip()
