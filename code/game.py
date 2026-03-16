@@ -14,9 +14,8 @@ RED = (200, 0, 0)
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        # self.image = pygame.image.load("anya.png").convert_alpha()
         self.image = pygame.Surface((50, 50))
-        self.image.fill((255, 182, 193)) # Rosa Anya
+        self.image = pygame.image.load("anya.png").convert_alpha()
         self.rect = self.image.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT - 60))
         self.speed = 7
 
@@ -88,7 +87,7 @@ def main():
         # Dentro do loop de colisões no game.py
         if pygame.sprite.spritecollide(anya, bolts, True):
             vidas_tonitrus -= 1
-            anya.chocada() 
+            anya.shocked() 
 
         if pygame.sprite.spritecollide(anya, bolts, True):
             print("Você ganhou 8 raios! Está expulsa do colégio Éden e adeus a paz mundial.")
