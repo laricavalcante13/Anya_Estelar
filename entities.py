@@ -1,6 +1,5 @@
 import pygame
 import random
-import os
 
 #-----Tamanho da tela-----
 SCREEN_WIDTH = 800
@@ -32,10 +31,10 @@ class Player(pygame.sprite.Sprite):
             self.image = self.image_normal
 
 class Item(pygame.sprite.Sprite):
-    def __init__(self, color, is_star=True):
+    def __init__(self, is_star=True):
         super().__init__()
         self.image = pygame.Surface((30, 30))
-        self.image.fill("assets/star.png" if is_star else "assets/bolt.png")
+        self.image.blit(pygame.image.load("assets/star.png") if is_star else pygame.image.load("assets/bolt.png"))
         self.rect = self.image.get_rect(x=random.randint(0, SCREEN_WIDTH-30), y=-50)
         self.speed = random.randint(3, 6)
         self.is_star = is_star

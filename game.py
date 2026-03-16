@@ -1,13 +1,11 @@
 import pygame
 import random
-import os
 from entities import Player, Item
 
 # --- Configurações Iniciais ---
 start_ticks = pygame.time.get_ticks() # Tempo inicial
-raios_tomados = 0
-LIMITE_RAIOS = 8 #vidas
 TEMPO_LIMITE = 60000 # 60 segundos
+# --- Tamanho da tela e FPS ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 FPS = 60
@@ -19,6 +17,10 @@ def main():
     background = pygame.image.load("assets/background.jpg").convert()
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
+    raios_tomados = 0 
+    limite_raios = 8
+    score = 0
+    start_ticks = pygame.time.get_ticks()
 
     # Grupos de Sprites
     all_sprites = pygame.sprite.Group()
@@ -66,7 +68,7 @@ def main():
             raios_tomados += 1
             update() 
             print(f"Raios: {raios_tomados}/8")
-            if raios_tomados >= LIMITE_RAIOS:
+            if raios_tomados >= limite_raios:
                 print("Game Over! Anya levou 8 raios e foi expulsa do Colégio Éden.")
                 running = False
 
