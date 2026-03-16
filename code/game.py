@@ -2,43 +2,13 @@ import pygame
 import random
 
 # --- Configurações Iniciais ---
+start_ticks = pygame.time.get_ticks() # Tempo inicial
+raios_tomados = 0
+LIMITE_RAIOS = 8 #vidas
+TEMPO_LIMITE = 60000 # 60 segundos
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 FPS = 60
-
-# Cores (Substitua por imagens depois)
-WHITE = (255, 255, 255)
-GOLD = (255, 215, 0)
-RED = (200, 0, 0)
-
-class Player(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.Surface((50, 50))
-        self.image = pygame.image.load("anya.png").convert_alpha()
-        self.rect = self.image.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT - 60))
-        self.speed = 7
-
-    def update(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and self.rect.left > 0:
-            self.rect.x -= self.speed
-        if keys[pygame.K_RIGHT] and self.rect.right < SCREEN_WIDTH:
-            self.rect.x += self.speed
-
-class Item(pygame.sprite.Sprite):
-    def __init__(self, color, is_star=True):
-        super().__init__()
-        self.image = pygame.Surface((30, 30))
-        self.image.fill(color)
-        self.rect = self.image.get_rect(x=random.randint(0, SCREEN_WIDTH-30), y=-50)
-        self.speed = random.randint(3, 6)
-        self.is_star = is_star
-
-    def update(self):
-        self.rect.y += self.speed
-        if self.rect.top > SCREEN_HEIGHT:
-            self.kill() # Remove o grupo quando sair da tela
 
 def main():
     pygame.init()
@@ -58,47 +28,48 @@ def main():
     running = True
 
     while running:
+        while running:
         # 1. Eventos
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # 2. Lógica de Spawning (Surgimento)
-        if random.random() < 0.02: # Chance de cair estrela
+        # 2. Lógica de Tempo e Vitória
+        segundos_decorridos = (pygame.time.get_ticks() - start_ticks)
+        if segundos_decorridos >= TEMPO_LIMITE:
+            print("Missão concluída! Anya se tornou uma discípula imperial!")
+            running = False
+
+        # 3. Spawning e Updates
+        if random.random() < 0.02: 
             s = Item(GOLD, True)
             stars.add(s)
             all_sprites.add(s)
         
-        if random.random() < 0.03: # Chance de cair raio (mais frequente)
+        if random.random() < 0.03:
             b = Item(RED, False)
             bolts.add(b)
             all_sprites.add(b)
 
-        # 3. Update
         all_sprites.update()
 
-        # Colisões
+        # 4. Colisões
         if pygame.sprite.spritecollide(anya, stars, True):
             score += 1
             print(f"Estrelas: {score}")
-            if score >= 8:
-                print("Missão Cumprida, Anya Estelar! Você salvou a paz mundial!")
+
+        colisao_raio = pygame.sprite.spritecollide(anya, bolts, True)
+        if colisao_raio:
+            raios_tomados += 1
+            update() 
+            print(f"Raios: {raios_tomados}/8")
+            if raios_tomados >= LIMITE_RAIOS:
+                print("Game Over! Anya levou 8 raios e foi expulsa do Colégio Éden.")
                 running = False
-        # Dentro do loop de colisões no game.py
-        if pygame.sprite.spritecollide(anya, bolts, True):
-            vidas_tonitrus -= 1
-            anya.shocked() 
 
-        if pygame.sprite.spritecollide(anya, bolts, True):
-            print("Você ganhou 8 raios! Está expulsa do colégio Éden e adeus a paz mundial.")
-            running = False
-
-        # 4. Desenho
-        screen.fill(WHITE)
+        # 5. Desenho
+        screen.fill()
         all_sprites.draw(screen)
-        
-        # Exibir placar  (implementar fonte aqui!!!)
-
         
         pygame.display.flip()
         clock.tick(FPS)
