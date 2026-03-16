@@ -1,5 +1,7 @@
 import pygame
 import random
+import os
+from entities import Player, Item
 
 # --- Configurações Iniciais ---
 start_ticks = pygame.time.get_ticks() # Tempo inicial
@@ -28,7 +30,6 @@ def main():
     running = True
 
     while running:
-        while running:
         # 1. Eventos
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

@@ -1,16 +1,16 @@
 import pygame
 import random
+import os
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        # Carregue suas duas imagens aqui
-        self.image_normal = pygame.image.load("anya.png").convert_alpha()
-        self.image_shock = pygame.image.load("anya_shocked.png").convert_alpha()
+        self.image_normal = pygame.image.load("assets/anya.png").convert_alpha()
+        self.image_shock = pygame.image.load("assets/anya_shocked.png").convert_alpha()
         self.image = self.image_normal
         self.rect = self.image.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT - 60))
         self.speed = 7
-        self.timer_shock = 0 # Para voltar ao normal após um tempo
+        self.timer_shock = 0 
 
     def shocked(self):
         self.image = self.image_shock
@@ -23,7 +23,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.x -= self.speed
         if keys[pygame.K_RIGHT] and self.rect.right < SCREEN_WIDTH:
             self.rect.x += self.speed
-        # Volta ao normal após 500ms do raio
+        # Volta ao normal após 500ms do raio.
         if self.image == self.image_shock and pygame.time.get_ticks() - self.timer_shock > 500:
             self.image = self.image_normal
 
@@ -39,4 +39,4 @@ class Item(pygame.sprite.Sprite):
     def update(self):
         self.rect.y += self.speed
         if self.rect.top > SCREEN_HEIGHT:
-            self.kill() # Remove o grupo quando sair da tela
+            self.kill() # Remove o grupo quando sair da tela.
