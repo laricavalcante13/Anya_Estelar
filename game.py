@@ -10,6 +10,24 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 FPS = 60
 
+def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, tempo_limite):
+    font = pygame.font.Font(None, 36)  # Fonte padrão tamanho 36
+
+    # Score das estrelas
+    score_surface = font.render(f"Estrelas: {score}", True, (255, 215, 0))
+    screen.blit(score_surface, (10, 50))  
+
+    # Score dos raios
+    raios_surface = font.render(f"Raios: {raios_tomados}/{limite_raios}", True, (163, 171, 174))
+    screen.blit(raios_surface, (10, 90))  
+
+    # Tempo restante
+    tempo_restante = max(0, (tempo_limite - segundos_decorridos) // 1000)  
+    minutos = tempo_restante // 60
+    segundos = tempo_restante % 60
+    tempo_surface = font.render(f"Tempo: {minutos:02d}:{segundos:02d}", True, (138, 76, 87))
+    screen.blit(tempo_surface, (10, 10)) 
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -66,7 +84,8 @@ def main():
         colisao_raio = pygame.sprite.spritecollide(anya, bolts, True)
         if colisao_raio:
             raios_tomados += 1
-            update() 
+            anya.shocked()
+            bolts.update() 
             print(f"Raios: {raios_tomados}/8")
             if raios_tomados >= limite_raios:
                 print("Game Over! Anya levou 8 raios e foi expulsa do Colégio Éden.")
@@ -75,6 +94,7 @@ def main():
         # 5. Desenho
         screen.blit(background, (0, 0))
         all_sprites.draw(screen)
+        time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, TEMPO_LIMITE)
         
         pygame.display.flip()
         clock.tick(FPS)
