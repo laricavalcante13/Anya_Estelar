@@ -33,7 +33,7 @@ def menu():
         start_text = font.render("Pressione ENTER para começar", True, (163, 171, 174))
         font = pygame.font.Font(None, 24)
         instructions_text = font.render("Use as setas esquerda e direita para mover", True, (163, 171, 174))
-        goal_text = font.render("Anya precisa coletar as estrelas e evitar os raios n/para não ser expulsa do Colégio Éden!", True, (163, 171, 174))
+        goal_text = font.render("Anya precisa coletar as estrelas e evitar os raios para não ser expulsa do Colégio Éden!", True, (163, 171, 174))
 
         screen.blit(title, (200, 150))
         screen.blit(start_text, (100, 300))
