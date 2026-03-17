@@ -29,12 +29,16 @@ def menu():
 
         # Textos
         font = pygame.font.Font(None, 48)
-        title = font.render("Anya Estelar: Missão Paz Mundial", True, (255, 255, 255))
-        start_text = font.render("Pressione ENTER para começar", True, (200, 200, 200))
-        instructions_text = font.render("Use as setas para mover, evite os raios e colete as estrelas!", True, (200, 200, 200))
+        title = font.render("Anya Estelar: Missão Paz Mundial", True, (0,0,0))
+        start_text = font.render("Pressione ENTER para começar", True, (163, 171, 174))
+        font = pygame.font.Font(None, 24)
+        instructions_text = font.render("Use as setas esquerda e direita para mover", True, (163, 171, 174))
+        goal_text = font.render("Anya precisa coletar as estrelas e evitar os raios n/para não ser expulsa do Colégio Éden!", True, (163, 171, 174))
+
         screen.blit(title, (200, 150))
         screen.blit(start_text, (100, 300))
         screen.blit(instructions_text, (100, 350))
+        screen.blit(goal_text, (100, 400))
 
         pygame.display.flip()
         clock.tick(60)
