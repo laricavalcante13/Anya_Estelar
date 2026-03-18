@@ -11,21 +11,21 @@ SCREEN_HEIGHT = 600
 FPS = 60
 
 def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, tempo_limite):
-    font = pygame.font.Font(None, 36)  # Fonte padrão tamanho 36
+    font = pygame.font.Font("assets/Orbitron-SemiBold.ttf", 36)
 
     # Score das estrelas
-    score_surface = font.render(f"Estrelas: {score}", True, (255, 215, 0))
+    score_surface = font.render(f"Estrelas: {score}", True, (141,169,155))
     screen.blit(score_surface, (10, 50))  
 
     # Score dos raios
-    raios_surface = font.render(f"Raios: {raios_tomados}/{limite_raios}", True, (163, 171, 174))
+    raios_surface = font.render(f"Raios: {raios_tomados}/{limite_raios}", True, (44,40,39))
     screen.blit(raios_surface, (10, 90))  
 
     # Tempo restante
     tempo_restante = max(0, (tempo_limite - segundos_decorridos) // 1000)  
     minutos = tempo_restante // 60
     segundos = tempo_restante % 60
-    tempo_surface = font.render(f"Tempo: {minutos:02d}:{segundos:02d}", True, (138, 76, 87))
+    tempo_surface = font.render(f"Tempo: {minutos:02d}:{segundos:02d}", True, (97,10,16))
     screen.blit(tempo_surface, (10, 10)) 
 
 def main():
@@ -99,7 +99,7 @@ def main():
         pygame.display.flip()
         clock.tick(FPS)
 
-    pygame.quit()
+    return
 
 if __name__ == "__main__":
     main()
