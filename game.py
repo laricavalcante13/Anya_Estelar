@@ -1,6 +1,7 @@
 import pygame
 import random
 from entities import Player, Item
+from finalscreen import victory, defeat
 
 # --- Configurações Iniciais ---
 start_ticks = pygame.time.get_ticks() # Tempo inicial
@@ -11,7 +12,7 @@ SCREEN_HEIGHT = 600
 FPS = 60
 
 def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, tempo_limite):
-    font = pygame.font.Font("assets/Orbitron-SemiBold.ttf", 36)
+    font = pygame.font.Font("assets/fonts/Orbitron-SemiBold.ttf", 36)
 
     # Score das estrelas
     score_surface = font.render(f"Estrelas: {score}", True, (141,169,155))
@@ -31,7 +32,7 @@ def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("Anya Estelar: Missão Paz Mundial")
+    pygame.display.set_caption("Missão Anya Estelar")
     background = pygame.image.load("assets/background.jpg").convert()
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
@@ -60,7 +61,7 @@ def main():
         # 2. Lógica de Tempo e Vitória
         segundos_decorridos = (pygame.time.get_ticks() - start_ticks)
         if segundos_decorridos >= TEMPO_LIMITE:
-            print("Missão concluída! Anya se tornou uma discípula imperial!")
+            victory()
             running = False
 
         # 3. Spawning e Updates
@@ -88,7 +89,7 @@ def main():
             bolts.update() 
             print(f"Raios: {raios_tomados}/8")
             if raios_tomados >= limite_raios:
-                print("Game Over! Anya levou 8 raios e foi expulsa do Colégio Éden.")
+                defeat()
                 running = False
 
         # 5. Desenho

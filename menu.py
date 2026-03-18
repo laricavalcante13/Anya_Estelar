@@ -16,20 +16,20 @@ def menu():
     clock = pygame.time.Clock()
 
     try:
-        background = pygame.image.load("assets/anya discipula imperial.jpg").convert()
-        font_title = pygame.font.Font("assets/spy-agency.ttf", 42)
-        font_start = pygame.font.Font("assets/Orbitron-ExtraBold.ttf", 40)
-        font_instr = pygame.font.Font("assets/spy-agency.ttf", 18)
-        font_goal = pygame.font.Font("assets/spy-agency.ttf", 14)
+        background = pygame.image.load("assets/menu.jpg").convert()
+        font_title = pygame.font.Font("assets/fonts/spy-agency.ttf", 42)
+        font_start = pygame.font.Font("assets/fonts/Orbitron-ExtraBold.ttf", 40)
+        font_instr = pygame.font.Font("assets/fonts/spy-agency.ttf", 18)
+        font_goal = pygame.font.Font("assets/fonts/Orbitron-Bold.ttf", 18)
     except FileNotFoundError as e:
         print(f"Erro: Certifique-se de que os arquivos estão na pasta assets! {e}")
         return
 
     #  Textos tela inicial
-    title = font_title.render("Missão Anya Estelar", True, (0, 0, 0))
-    start_text = font_start.render("Pressione ENTER para começar", True, (211, 211, 211))
-    instructions_text = font_instr.render("Use as setas esquerda e direita para mover", True, (211, 211, 211))
-    goal_text = font_goal.render("Colete as estrelas e evite os raios para não ser expulsa do Colégio Éden!", True, (250, 179, 173))
+    title = font_title.render("Missão Anya Estelar", True, (97,10,16))
+    start_text = font_start.render("Pressione ENTER para começar", True, (141,169,155))
+    instructions_text = font_instr.render("Use as setas esquerda e direita para mover", True, (141,169,155))
+    goal_text = font_goal.render("Colete as estrelas e evite os raios para não ser expulsa do Colégio Éden!", True, (250,179,173))
 
     running = True
     while running:
@@ -46,7 +46,7 @@ def menu():
 
         # Renderizar textos na tela do menu
         screen.blit(background, (0, 0))
-        screen.blit(title, (80, 250))
+        screen.blit(title, (80, 200))
         screen.blit(start_text, (25, 350))
         screen.blit(instructions_text, (105, 430))
         screen.blit(goal_text, (30, 520))

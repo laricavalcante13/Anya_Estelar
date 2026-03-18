@@ -8,8 +8,8 @@ SCREEN_HEIGHT = 600
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image_normal = pygame.image.load("assets/anya.png").convert_alpha()
-        self.image_shock = pygame.image.load("assets/anya_shocked.png").convert_alpha()
+        self.image_normal = pygame.image.load("assets/anya/anya-happy2.png").convert_alpha()
+        self.image_shock = pygame.image.load("assets/anya/anya-shocked.png").convert_alpha()
         self.image = self.image_normal
         self.rect = self.image.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT - 60))
         self.speed = 7
