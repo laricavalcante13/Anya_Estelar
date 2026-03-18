@@ -12,10 +12,10 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Missão Anya Estelar")
 
-def victory()
+def victory():
 
     try:
-        background = pygame.image.load("assets/paz mundial.jpg").convert()
+        victorybackground = pygame.image.load("assets/paz mundial.jpg").convert()
         font_victory = pygame.font.Font("assets/fonts/spy-agency.ttf", 42)
     except FileNotFoundError as e:
         print(f"Erro: Certifique-se de que os arquivos estão na pasta assets! {e}")
@@ -32,12 +32,20 @@ def victory()
                 if event.key == pygame.K_RETURN:
                     return "menu"
 
-        screen.fill((0, 0, 0))
-
+        screen.blit(victorybackground, (0, 0))
+        screen.blit(font_victory, (80, 200))
         pygame.display.flip()
 
 
-def defeat()
+def defeat():
+
+    try:
+        defeatbackground = pygame.image.load("assets/anya crying.jpg").convert()
+        font_defeat = pygame.font.Font("assets/fonts/spy-agency.ttf", 42)
+    except FileNotFoundError as e:
+        print(f"Erro: Certifique-se de que os arquivos estão na pasta assets! {e}")
+        return
+
     while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -48,7 +56,7 @@ def defeat()
                     if event.key == pygame.K_RETURN:
                         return "menu"
     
-            screen.fill((0, 0, 0))
-    
-            pygame.display.flip()
+        screen.blit(defeatbackground, (0, 0))
+        screen.blit(font_defeat, (80, 200))
+        pygame.display.flip()
 
