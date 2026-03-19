@@ -59,7 +59,6 @@ def menu():
                 if event.key == pygame.K_RETURN:
                     if fase_menu == 1:
                         fase_menu = 2  # Avança para as instruções
-                        pygame.mixer.music.stop()
                     else:
                         return True         # Inicia o jogo
                 
@@ -90,6 +89,8 @@ if __name__ == "__main__":
     while True:
         # 1. Abre o menu. Ele fica preso aqui até você dar ENTER na tela 2.
         jogar = menu() 
+        pygame.mixer.music.stop()
+
         
         if jogar:
             # 2. Abre o jogo. Quando você ganha/perde, a main() termina e volta pra cá.
