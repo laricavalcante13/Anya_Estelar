@@ -11,12 +11,11 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Missão Anya Estelar")
 
-
 def menu():  
     clock = pygame.time.Clock()
 
     try:
-        background = pygame.image.load("assets/menu.jpg").convert()
+        background = pygame.image.load("assets/menu3.jpg").convert()
         font_title = pygame.font.Font("assets/fonts/spy-agency.ttf", 42)
         font_start = pygame.font.Font("assets/fonts/Orbitron-ExtraBold.ttf", 40)
         font_instr = pygame.font.Font("assets/fonts/spy-agency.ttf", 18)
@@ -25,13 +24,20 @@ def menu():
         print(f"Erro {e}")
         return
 
-    #  Textos tela inicial
+    # Textos Parte 1 (Título)
     title = font_title.render("Missão Anya Estelar", True, (97,10,16))
-    start_text = font_start.render("Pressione ENTER para começar", True, (141,169,155))
-    instructions_text = font_instr.render("Use as setas esquerda e direita para mover", True, (141,169,155))
-    goal_text = font_goal.render("Colete as estrelas e evite os raios para não ser expulsa do Colégio Éden!", True, (250,179,173))
+    start_text = font_start.render("Pressione ENTER para continuar", True, (141,169,155))
+    
+    # Textos Parte 2 (Instruções)
+    instr_title = font_title.render("Instruções:", True, (250,179,173))
+    instructions_text = font_instr.render("Use as setas esquerda e direita para mover", True, (255,255,255))
+    goal_text = font_goal.render("Colete as estrelas e evite os raios para não ser expulsa do Colégio Éden!", True, (255,255,255))
+    play_text = font_start.render("ENTER para Iniciar Missão", True, (141,169,155))
 
+    # Variável de controle: 1 para Título, 2 para Instruções
+    fase_menu = 1
     running = True
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -40,16 +46,29 @@ def menu():
             
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    main() 
+                    if fase_menu == 1:
+                        fase_menu = 2  # Avança para as instruções
+                    else:
+                        main()         # Inicia o jogo
+                
                 elif event.key == pygame.K_ESCAPE:
-                    running = False
+                    if fase_menu == 2:
+                        fase_menu = 1  # Volta para o título
+                    else:
+                        running = False
 
-        # Renderizar textos na tela do menu
+        # --- Renderização ---
         screen.blit(background, (0, 0))
-        screen.blit(title, (80, 200))
-        screen.blit(start_text, (25, 350))
-        screen.blit(instructions_text, (105, 430))
-        screen.blit(goal_text, (30, 520))
+
+        if fase_menu == 1:
+            screen.blit(title, (80, 200))
+            screen.blit(start_text, (25, 350))
+        
+        elif fase_menu == 2:
+            screen.blit(instr_title, (250, 100))
+            screen.blit(instructions_text, (105, 250))
+            screen.blit(goal_text, (30, 300))
+            screen.blit(play_text, (80, 450))
 
         pygame.display.flip()
         clock.tick(FPS)

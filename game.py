@@ -33,7 +33,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Missão Anya Estelar")
-    background = pygame.image.load("assets/background.jpg").convert()
+    background = pygame.image.load("assets/background3.jpg").convert()
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     raios_tomados = 0 
