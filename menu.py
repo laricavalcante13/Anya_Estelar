@@ -1,7 +1,7 @@
 import pygame
 import sys
 from game import main
-from database import get_high_score
+from database import init_db, get_high_score
 
 # Constantes
 SCREEN_WIDTH = 800
@@ -14,7 +14,8 @@ pygame.display.set_caption("Missão Anya Estelar")
 
 def menu():  
     clock = pygame.time.Clock()
-    high_score = get_high_score()
+    init_db()
+    recorde = get_high_score()
 
     try:
         background = pygame.image.load("assets/menu3.jpg").convert()
@@ -30,7 +31,7 @@ def menu():
     # Textos Parte 1 (Título)
     title = font_title.render("Missão Anya Estelar", True, (250,179,173))
     start_text = font_start.render("Pressione ENTER para continuar", True, (255,255,255))
-    high_score_text = font_high_score.render(f"Recorde: {high_score}", True, (255,255,255))
+    high_score_text = font_high_score.render(f"HIGH SCORE: {get_high_score()}", True, (255,255,255))
 
     # Textos Parte 2 (Instruções)
     instr_title = font_title.render("Instruções:", True, (250,179,173))
@@ -53,7 +54,7 @@ def menu():
                     if fase_menu == 1:
                         fase_menu = 2  # Avança para as instruções
                     else:
-                        main()         # Inicia o jogo
+                        return True         # Inicia o jogo
                 
                 elif event.key == pygame.K_ESCAPE:
                     if fase_menu == 2:
@@ -67,7 +68,7 @@ def menu():
         if fase_menu == 1:
             screen.blit(title, (80, 200))
             screen.blit(start_text, (25, 350))
-            screen.blit(high_score_text, (25, 400))
+            screen.blit(high_score_text, (270, 500))
         
         elif fase_menu == 2:
             screen.blit(instr_title, (250, 100))
@@ -79,4 +80,12 @@ def menu():
         clock.tick(FPS)
 
 if __name__ == "__main__":
-    menu()
+    while True:
+        # 1. Abre o menu. Ele fica preso aqui até você dar ENTER na tela 2.
+        jogar = menu() 
+        
+        if jogar:
+            # 2. Abre o jogo. Quando você ganha/perde, a main() termina e volta pra cá.
+            main() 
+        else:
+            break

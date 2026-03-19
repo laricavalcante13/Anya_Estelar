@@ -1,6 +1,7 @@
 import pygame
 import random
 from entities import Player, Item
+from database import save_score
 
 # --- Configurações Iniciais ---
 start_ticks = pygame.time.get_ticks() # Tempo inicial
@@ -62,6 +63,7 @@ def main():
         segundos_decorridos = (pygame.time.get_ticks() - start_ticks)
         segundos_atuais = segundos_decorridos / 1000
         if segundos_decorridos >= TEMPO_LIMITE:
+            save_score(score)
             victory(screen)
             return
 
@@ -104,6 +106,12 @@ def main():
     return
 
 if __name__ == "__main__":
-    while True:  # O jogo nunca fecha sozinho
-        menu()   # 1. Abre o Menu e espera você apertar ENTER
-        main()   # 2. Quando o Menu acaba, ele abre o Jogo e espera você perder
+    while True:
+        # 1. Abre o menu. Ele fica preso aqui até você dar ENTER na tela 2.
+        jogar = menu() 
+        
+        if jogar:
+            # 2. Abre o jogo. Quando você ganha/perde, a main() termina e volta pra cá.
+            main() 
+        else:
+            break
