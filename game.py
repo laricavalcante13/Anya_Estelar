@@ -1,7 +1,6 @@
 import pygame
 import random
 from entities import Player, Item
-from finalscreen import victory, defeat
 
 # --- Configurações Iniciais ---
 start_ticks = pygame.time.get_ticks() # Tempo inicial
@@ -30,6 +29,7 @@ def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, 
     screen.blit(tempo_surface, (10, 10)) 
 
 def main():
+    from finalscreen import victory, defeat
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Missão Anya Estelar")
