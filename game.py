@@ -32,6 +32,14 @@ def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, 
 def main():
     from finalscreen import victory, defeat
     pygame.init()
+    
+    #Música do jogo
+    pygame.mixer.init()
+    pygame.mixer.music.load("assets/kura-kura.mp3")
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)
+    
+    # Tela e Fundo
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Missão Anya Estelar")
     background = pygame.image.load("assets/background3.jpg").convert()
@@ -63,6 +71,7 @@ def main():
         segundos_decorridos = (pygame.time.get_ticks() - start_ticks)
         segundos_atuais = segundos_decorridos / 1000
         if segundos_decorridos >= TEMPO_LIMITE:
+            pygame.mixer.music.stop()
             save_score(score)
             victory(screen)
             return
@@ -92,6 +101,7 @@ def main():
             bolts.update() 
             print(f"Raios: {raios_tomados}/8")
             if raios_tomados >= limite_raios:
+                pygame.mixer.music.stop()
                 defeat(screen)
                 return
 

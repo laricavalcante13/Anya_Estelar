@@ -9,13 +9,19 @@ SCREEN_HEIGHT = 600
 FPS = 60
 
 pygame.init()
+# Tela e Fundo
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Missão Anya Estelar")
+# Música do jogo
+pygame.mixer.init()
+pygame.mixer.music.load("assets/kura-kura.mp3")
+pygame.mixer.music.set_volume(0.5)
 
 def menu():  
     clock = pygame.time.Clock()
     init_db()
     recorde = get_high_score()
+    pygame.mixer.music.play(-1)
 
     try:
         background = pygame.image.load("assets/menu3.jpg").convert()
@@ -53,6 +59,7 @@ def menu():
                 if event.key == pygame.K_RETURN:
                     if fase_menu == 1:
                         fase_menu = 2  # Avança para as instruções
+                        pygame.mixer.music.stop()
                     else:
                         return True         # Inicia o jogo
                 
