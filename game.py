@@ -14,7 +14,7 @@ def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, 
     font = pygame.font.Font("assets/fonts/Orbitron-SemiBold.ttf", 36)
 
     # Score das estrelas
-    score_surface = font.render(f"Estrelas: {score}", True, (141,169,155))
+    score_surface = font.render(f"Estrelas: {score}", True, (87,103,92))
     screen.blit(score_surface, (10, 50))  
 
     # Score dos raios
@@ -63,7 +63,7 @@ def main():
         segundos_atuais = segundos_decorridos / 1000
         if segundos_decorridos >= TEMPO_LIMITE:
             victory(screen)
-            running = False
+            return
 
         # 3. Spawning e Updates
         if random.random() < 0.02: 
@@ -91,7 +91,7 @@ def main():
             print(f"Raios: {raios_tomados}/8")
             if raios_tomados >= limite_raios:
                 defeat(screen)
-                running = False
+                return
 
         # 5. Desenho
         screen.blit(background, (0, 0))
@@ -104,4 +104,6 @@ def main():
     return
 
 if __name__ == "__main__":
-    main()
+    while True:  # O jogo nunca fecha sozinho
+        menu()   # 1. Abre o Menu e espera você apertar ENTER
+        main()   # 2. Quando o Menu acaba, ele abre o Jogo e espera você perder

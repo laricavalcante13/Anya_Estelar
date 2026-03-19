@@ -25,14 +25,14 @@ def menu():
         return
 
     # Textos Parte 1 (Título)
-    title = font_title.render("Missão Anya Estelar", True, (97,10,16))
-    start_text = font_start.render("Pressione ENTER para continuar", True, (141,169,155))
+    title = font_title.render("Missão Anya Estelar", True, (250,179,173))
+    start_text = font_start.render("Pressione ENTER para continuar", True, (255,255,255))
     
     # Textos Parte 2 (Instruções)
     instr_title = font_title.render("Instruções:", True, (250,179,173))
-    instructions_text = font_instr.render("Use as setas esquerda e direita para mover", True, (255,255,255))
-    goal_text = font_goal.render("Colete as estrelas e evite os raios para não ser expulsa do Colégio Éden!", True, (255,255,255))
-    play_text = font_start.render("ENTER para Iniciar Missão", True, (141,169,155))
+    instructions_text = font_instr.render("Use as setas esquerda e direita para mover", True, (141,169,155))
+    goal_text = font_goal.render("Colete as estrelas e evite os raios para não ser expulsa do Colégio Éden!", True, (141,169,155))
+    play_text = font_start.render("ENTER para Iniciar Missão", True, (255,255,255))
 
     # Variável de controle: 1 para Título, 2 para Instruções
     fase_menu = 1

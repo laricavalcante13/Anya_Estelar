@@ -7,7 +7,6 @@ SCREEN_HEIGHT = 600
 FPS = 60
 
 def victory(screen):
-    from menu import menu
     try:
         victorybackground = pygame.image.load("assets/paz mundial.jpg").convert()
         victorybackground = pygame.transform.scale(victorybackground, (SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -16,8 +15,8 @@ def victory(screen):
         print(f"Erro {e}")
         return
 
-    text_victory = font_obj.render("Você venceu!", True, (97,10,16))
-    text_victory2 = font_obj.render("Anya agora é uma discípula imperial!", True, (141,169,155))
+    text_victory = font_obj.render("Você venceu!", True, (141,169,155))
+    text_victory2 = font_obj.render("Anya se tornou uma discípula imperial do Colégio Éden!", True, (255,255,255))
 
     while True:
         for event in pygame.event.get():
@@ -36,17 +35,16 @@ def victory(screen):
 
 
 def defeat(screen):
-    from menu import menu
     try:
-        defeatbackground = pygame.image.load("assets/anya crying.jpg").convert()
+        defeatbackground = pygame.image.load("assets/defeated.png").convert()
         defeatbackground = pygame.transform.scale(defeatbackground, (SCREEN_WIDTH, SCREEN_HEIGHT))
         font_obj = pygame.font.Font("assets/fonts/spy-agency.ttf", 32)
     except FileNotFoundError as e:
         print(f"Erro: {e}")
         return
 
-    text_defeat = font_obj.render("Você perdeu!", True, (97,10,16))
-    text_defeat2 = font_obj.render("Anya recebeu 8 raios e foi expulsa!", True, (141,169,155))
+    text_defeat = font_obj.render("Você perdeu!", True, (44,40,39))
+    text_defeat2 = font_obj.render("Anya recebeu 8 raios e foi expulsa do Colégio Éden!", True, (44,40,39))
 
     while True:
         for event in pygame.event.get():
