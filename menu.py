@@ -22,7 +22,7 @@ def menu():
         font_instr = pygame.font.Font("assets/fonts/spy-agency.ttf", 18)
         font_goal = pygame.font.Font("assets/fonts/Orbitron-Bold.ttf", 18)
     except FileNotFoundError as e:
-        print(f"Erro: Certifique-se de que os arquivos estão na pasta assets! {e}")
+        print(f"Erro {e}")
         return
 
     #  Textos tela inicial

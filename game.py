@@ -60,18 +60,19 @@ def main():
 
         # 2. Lógica de Tempo e Vitória
         segundos_decorridos = (pygame.time.get_ticks() - start_ticks)
+        segundos_atuais = segundos_decorridos / 1000
         if segundos_decorridos >= TEMPO_LIMITE:
-            victory()
+            victory(screen)
             running = False
 
         # 3. Spawning e Updates
         if random.random() < 0.02: 
-            s = Item(is_star=True)
+            s = Item(segundos_atuais, is_star=True)
             stars.add(s)
             all_sprites.add(s)
         
         if random.random() < 0.03:
-            b = Item(is_star=False)
+            b = Item(segundos_atuais, is_star=False)
             bolts.add(b)
             all_sprites.add(b)
 
@@ -89,7 +90,7 @@ def main():
             bolts.update() 
             print(f"Raios: {raios_tomados}/8")
             if raios_tomados >= limite_raios:
-                defeat()
+                defeat(screen)
                 running = False
 
         # 5. Desenho

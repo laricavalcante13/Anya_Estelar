@@ -1,15 +1,15 @@
 import pygame
 import random
 
-#-----Tamanho da tela-----
+# --- Tamanho da tela  ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image_normal = pygame.image.load("assets/anya/anya-happy2.png").convert_alpha()
-        self.image_shock = pygame.image.load("assets/anya/anya-shocked.png").convert_alpha()
+        self.image_normal = pygame.image.load("assets/anya-happy2.png").convert_alpha()
+        self.image_shock = pygame.image.load("assets/anya-shocked.png").convert_alpha()
         self.image = self.image_normal
         self.rect = self.image.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT - 60))
         self.speed = 7
@@ -31,12 +31,16 @@ class Player(pygame.sprite.Sprite):
             self.image = self.image_normal
 
 class Item(pygame.sprite.Sprite):
-    def __init__(self, is_star=True):
+    def __init__(self, segundos, is_star=True):
         super().__init__()
-        self.image = pygame.Surface((30, 30))
-        self.image.blit(pygame.image.load("assets/star.png") if is_star else pygame.image.load("assets/bolt.png"))
-        self.rect = self.image.get_rect(x=random.randint(0, SCREEN_WIDTH-30), y=-50)
-        self.speed = random.randint(3, 6)
+        self.image = pygame.Surface((50, 50))
+        if is_star:
+            self.image = pygame.image.load("assets/star.png").convert_alpha()
+        else:
+            self.image = pygame.image.load("assets/bolt.png").convert_alpha()
+        self.rect = self.image.get_rect(x=random.randint(0, SCREEN_WIDTH-50), y=-50)
+        bonus = segundos * 0.1 
+        self.speed = random.randint(3, 6) + bonus
         self.is_star = is_star
 
     def update(self):
