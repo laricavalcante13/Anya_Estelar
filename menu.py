@@ -14,7 +14,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Missão Anya Estelar")
 # Música do jogo
 pygame.mixer.init()
-pygame.mixer.music.load("assets/sounds/kura-kura.mp3")
+pygame.mixer.music.load("assets/sounds/kura-kura2.mp3")
 pygame.mixer.music.set_volume(0.5)
 
 def menu():  
@@ -93,7 +93,6 @@ if __name__ == "__main__":
 
         
         if jogar:
-            # 2. Abre o jogo. Quando você ganha/perde, a main() termina e volta pra cá.
             main() 
         else:
             break

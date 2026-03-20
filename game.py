@@ -35,7 +35,7 @@ def main():
     
     #Música do jogo
     pygame.mixer.init()
-    pygame.mixer.music.load("assets/sounds/kura-kura.mp3")
+    pygame.mixer.music.load("assets/sounds/kura-kura2.mp3")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
     
@@ -102,6 +102,7 @@ def main():
             print(f"Raios: {raios_tomados}/8")
             if raios_tomados >= limite_raios:
                 pygame.mixer.music.stop()
+                save_score(score)
                 defeat(screen)
                 return
 
@@ -117,11 +118,8 @@ def main():
 
 if __name__ == "__main__":
     while True:
-        # 1. Abre o menu. Ele fica preso aqui até você dar ENTER na tela 2.
         jogar = menu() 
-        
         if jogar:
-            # 2. Abre o jogo. Quando você ganha/perde, a main() termina e volta pra cá.
             main() 
         else:
             break

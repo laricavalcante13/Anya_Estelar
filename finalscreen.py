@@ -9,11 +9,9 @@ FPS = 60
 def victory(screen):
     try:
         victorybackground = pygame.image.load("assets/paz-mundial.jpeg").convert()
-        victorybackground = pygame.transform.scale(victorybackground, (SCREEN_WIDTH, SCREEN_HEIGHT))
         font_victory = pygame.font.Font("assets/fonts/spy-agency.ttf", 52) 
         font_victory2 = pygame.font.Font("assets/fonts/Orbitron-Medium.ttf", 24) 
         font_return = pygame.font.Font("assets/fonts/Orbitron-ExtraBold.ttf", 30)
-
 
     except FileNotFoundError as e:
         print(f"Erro {e}")
@@ -41,13 +39,13 @@ def victory(screen):
 
 
 def defeat(screen):
+    pygame.mixer.music.load("assets/sounds/sorry.mp3")
+    pygame.mixer.music.play(0)
     try:
         defeatbackground = pygame.image.load("assets/defeated.png").convert()
-        defeatbackground = pygame.transform.scale(defeatbackground, (SCREEN_WIDTH, SCREEN_HEIGHT))
         font_defeat = pygame.font.Font("assets/fonts/spy-agency.ttf", 52)
         font_defeat2 = pygame.font.Font("assets/fonts/Orbitron-Medium.ttf", 24)
         font_return = pygame.font.Font("assets/fonts/Orbitron-ExtraBold.ttf", 30)
-
 
     except FileNotFoundError as e:
         print(f"Erro: {e}")
@@ -60,15 +58,17 @@ def defeat(screen):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.mixer.music.stop()
                 pygame.quit()
                 exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    pygame.mixer.music.stop()
                     return "menu"
     
         screen.blit(defeatbackground, (0, 0))
-        screen.blit(text_defeat, (130, 80))
-        screen.blit(text_defeat2, (75, 160))
+        screen.blit(text_defeat, (160, 160))
+        screen.blit(text_defeat2, (75, 240))
         screen.blit(text_return, (80, 350))
 
         pygame.display.flip()
