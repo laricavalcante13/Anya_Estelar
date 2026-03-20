@@ -5,6 +5,7 @@ import random
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+# Classe do jogador.
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -16,6 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.timer_shock = 0 
 
     def shocked(self):
+        # Troca a imagem em caso de colisão e inicia o timer.
         self.image = self.image_shock
         self.timer_shock = pygame.time.get_ticks()
 
@@ -26,10 +28,11 @@ class Player(pygame.sprite.Sprite):
             self.rect.x -= self.speed
         if keys[pygame.K_RIGHT] and self.rect.right < SCREEN_WIDTH:
             self.rect.x += self.speed
-        # Volta ao normal após 500ms do raio.
+        # Imagem do jogador volta ao normal após colisão.
         if self.image == self.image_shock and pygame.time.get_ticks() - self.timer_shock > 500:
             self.image = self.image_normal
 
+# Classe dos itens (estrelas e raios).
 class Item(pygame.sprite.Sprite):
     def __init__(self, segundos, is_star=True):
         super().__init__()

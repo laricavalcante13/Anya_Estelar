@@ -11,6 +11,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 FPS = 60
 
+# Função para exibir o score, itens e tempo restante do jogo.
 def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, tempo_limite):
     font = pygame.font.Font("assets/fonts/Orbitron-SemiBold.ttf", 36)
 
@@ -29,11 +30,12 @@ def time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, 
     tempo_surface = font.render(f"Tempo: {minutos:02d}:{segundos:02d}", True, (97,10,16))
     screen.blit(tempo_surface, (10, 10)) 
 
+# Função principal do jogo
 def main():
     from finalscreen import victory, defeat
     pygame.init()
     
-    #Música do jogo
+    # Música do jogo
     pygame.mixer.init()
     pygame.mixer.music.load("assets/sounds/kura-kura2.mp3")
     pygame.mixer.music.set_volume(0.5)
@@ -106,7 +108,7 @@ def main():
                 defeat(screen)
                 return
 
-        # 5. Desenho
+        # 5. Renderização da tela
         screen.blit(background, (0, 0))
         all_sprites.draw(screen)
         time_score(screen, score, raios_tomados, limite_raios, segundos_decorridos, TEMPO_LIMITE)
@@ -117,9 +119,4 @@ def main():
     return
 
 if __name__ == "__main__":
-    while True:
-        jogar = menu() 
-        if jogar:
-            main() 
-        else:
-            break
+    main()
