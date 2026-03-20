@@ -23,7 +23,7 @@ def menu():
     clock = pygame.time.Clock()
     init_db()
     recorde = get_high_score()
-    pygame.mixer.music.play(-1)
+    pygame.mixer.music.play(0)
 
     #Imagens e fontes do menu
     try:

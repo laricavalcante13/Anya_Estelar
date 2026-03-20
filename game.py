@@ -39,7 +39,7 @@ def main():
     pygame.mixer.init()
     pygame.mixer.music.load("assets/sounds/kura-kura2.mp3")
     pygame.mixer.music.set_volume(0.5)
-    pygame.mixer.music.play(-1)
+    pygame.mixer.music.play(0)
     
     # Tela e Fundo
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
