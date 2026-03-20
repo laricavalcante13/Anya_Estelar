@@ -8,7 +8,7 @@ FPS = 60
 
 def victory(screen):
     try:
-        victorybackground = pygame.image.load("assets/paz-mundial.jpg").convert()
+        victorybackground = pygame.image.load("assets/paz-mundial.jpeg").convert()
         victorybackground = pygame.transform.scale(victorybackground, (SCREEN_WIDTH, SCREEN_HEIGHT))
         font_victory = pygame.font.Font("assets/fonts/spy-agency.ttf", 52) 
         font_victory2 = pygame.font.Font("assets/fonts/Orbitron-Medium.ttf", 24) 
@@ -33,8 +33,8 @@ def victory(screen):
                     return "menu"
 
         screen.blit(victorybackground, (0, 0))
-        screen.blit(text_victory, (130, 80))
-        screen.blit(text_victory2, (75, 160)) 
+        screen.blit(text_victory, (150, 160))
+        screen.blit(text_victory2, (50, 240)) 
         screen.blit(text_return, (80, 350))
 
         pygame.display.flip()
