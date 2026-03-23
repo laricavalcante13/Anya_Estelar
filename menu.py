@@ -13,17 +13,15 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Missão Anya Estelar")
 
-# Música do jogo
-pygame.mixer.init()
-pygame.mixer.music.load("assets/sounds/kura-kura2.mp3")
-pygame.mixer.music.set_volume(0.5)
-
 #função do menu
 def menu():  
     clock = pygame.time.Clock()
     init_db()
     recorde = get_high_score()
-    pygame.mixer.music.play(0)
+    pygame.mixer.init()
+    pygame.mixer.music.load("assets/sounds/kura-kura2.mp3")
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)
 
     #Imagens e fontes do menu
     try:
